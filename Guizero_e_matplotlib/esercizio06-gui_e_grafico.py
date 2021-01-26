@@ -28,7 +28,7 @@ def grafico():
     data2coord()
     plt.plot(coordX, coordY)
     plt.savefig("grafico.png")
-
+    plt.clf()
     graph = Picture(app, image = "grafico.png")
 
 

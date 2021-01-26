@@ -1,4 +1,5 @@
-from tkinter import Image, image_names
+import os
+from typing import List
 import matplotlib.pyplot as plt
 from guizero import *
 import csv
@@ -6,11 +7,12 @@ import csv
 datiPc = "dati-pc.csv"
 datiInternet = "dati-internet.csv"
 datiSelezionati = {
-    "dati": "",
-    "anno": "",
-    "utilizzo": ""
+    "dati": datiPc,
+    "anno": "2018",
+    "utilizzo": "si"
 }
-
+nomeImmagineGrafico = "elaborazione-dati-statistici.png"
+colore = ""
 
 #FUNZIONI
 def select_pc():
@@ -37,11 +39,20 @@ def select_usano():
     datiSelezionati["utilizzo"] = "si"
     print(datiSelezionati["utilizzo"])
 
+def esadecimale(n):
+    if n < 16:
+        return str(hex(n)).replace("x","")
+    elif n >= 16 and n <= 255:
+        return str(hex(n)).replace("0x","")
+
 #CSV
+
 x = []
 y = []
-
 def csv2data():
+
+    global x, y
+
     datas = []
 
     with open(datiSelezionati["dati"], "r") as file:
@@ -52,57 +63,76 @@ def csv2data():
     datas.pop(0)
 
     if y != []:
-        for i in y:
-            y.pop(0)
+         y = []
+    
+    if x != []:
+        x = []
 
     if datiSelezionati["dati"] == datiPc:
         if datiSelezionati["anno"] == "2018":
             if datiSelezionati["utilizzo"] == "si":
                 for i in range(13):
                     x.append(datas[i][1])
-                    y.append(datas[i][2])
+                    valore = datas[i][2].replace(",",".")
+                    y.append(float(valore))
             else:
                 for i in range(13):
                     x.append(datas[i][1])
-                    y.append(datas[i][7])
+                    valore = datas[i][7].replace(",",".")
+                    y.append(float(valore))
         else:
             if datiSelezionati["utilizzo"] == "si":
-                for i in range(14,26):
+                for i in range(13,26):
                     x.append(datas[i][1])
-                    y.append(datas[i][7])
+                    valore = datas[i][7].replace(",",".")
+                    y.append(float(valore))
             else:
-                for i in range(14,26):
+                for i in range(13,26):
                     x.append(datas[i][1])
-                    y.append(datas[i][7])
+                    valore = datas[i][7].replace(",",".")
+                    y.append(float(valore))
     else:
         if datiSelezionati["anno"] == "2018":
             if datiSelezionati["utilizzo"] == "si":
                 for i in range(12):
                     x.append(datas[i][1])
-                    y.append(datas[i][2])
+                    valore = datas[i][2].replace(",",".")
+                    y.append(float(valore))
             else:
                 for i in range(12):
                     x.append(datas[i][1])
-                    y.append(datas[i][7])
+                    valore = datas[i][7].replace(",",".")
+                    y.append(float(valore))
         else:
             if datiSelezionati["utilizzo"] == "si":
-                for i in range(13,24):
+                for i in range(12,24):
                     x.append(datas[i][1])
-                    y.append(datas[i][2])
+                    valore = datas[i][2].replace(",",".")
+                    y.append(float(valore))
             else:
-                for i in range(13,24):
+                for i in range(12,24):
                     x.append(datas[i][1])
-                    y.append(datas[i][7])
+                    valore = datas[i][7].replace(",",".")
+                    y.append(float(valore))
+
+# csv2data()
 
 #GRAFICO
 
 def grafico():
     csv2data()
-    plt.bar(x, y, width=0.6)
-    # plt.set_xscale("linear")
+    colore = "#" + esadecimale(red_slider.value) + esadecimale(green_slider.value) + esadecimale(blue_slider.value)
+
+    if os.path.exists(nomeImmagineGrafico):
+        os.remove(nomeImmagineGrafico)
+    else: pass
+
+    plt.bar(x, y, width=0.6, color=colore)
     plt.xticks(rotation=328)
-    plt.savefig("elaborazione-dati-statistici.png")
-    graph = Picture(app, image="elaborazione-dati-statistici.png", grid=[2,0])
+    plt.savefig(nomeImmagineGrafico)
+    plt.clf()
+
+    graph = Picture(app, image=nomeImmagineGrafico, grid=[2,2])
 
 #GUI
 
@@ -115,5 +145,12 @@ but19 = PushButton(app, grid=[1,2], command=select_2019, text="2019")
 butUsano = PushButton(app, grid=[0,3], command=select_usano, text="Usano")
 butNonUsano = PushButton(app, grid=[1,3], command=select_non_usano, text="Non usano")
 gen_but = PushButton(app, grid=[0,4], command=grafico, text="Genera")
+testo_colore = Text(app, text="Colore del grafico:", grid=[4, 0])
+red_slider = Slider(app, end=255, grid=[4,1])
+red_slider.text_color = "#ff0000"
+green_slider = Slider(app, end=255, grid=[4,2])
+green_slider.text_color = "#00ff00"
+blue_slider = Slider(app, end=255, grid=[4,3])
+blue_slider.text_color = "#0000ff"
 
 app.display()
