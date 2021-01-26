@@ -49,6 +49,7 @@ def esadecimale(n):
 
 x = []
 y = []
+
 def csv2data():
 
     global x, y
@@ -114,8 +115,6 @@ def csv2data():
                     x.append(datas[i][1])
                     valore = datas[i][7].replace(",",".")
                     y.append(float(valore))
-
-# csv2data()
 
 #GRAFICO
 
