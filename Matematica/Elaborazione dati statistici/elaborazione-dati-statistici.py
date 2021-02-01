@@ -1,3 +1,4 @@
+#Autori: Ferrante Gabriele, Russo Jorge, Barra Mario
 import os
 from typing import List
 import matplotlib.pyplot as plt
