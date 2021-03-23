@@ -102,14 +102,14 @@ def graph(gradi):
     if gradi == 30 or gradi == '30':
         fig.suptitle('30 gradi')
 
-        gf1.plot(data30_1_t, data30_1_spd)
-        gf1.plot(data30_1_t, data30_1_acc)
+        gf1.scatter(data30_1_t, data30_1_spd)
+        gf1.scatter(data30_1_t, data30_1_acc)
 
-        gf2.plot(data30_2_t, data30_2_spd)
-        gf2.plot(data30_2_t, data30_2_acc)
+        gf2.scatter(data30_2_t, data30_2_spd)
+        gf2.scatter(data30_2_t, data30_2_acc)
 
-        gf3.plot(data30_3_t, data30_3_spd)
-        gf3.plot(data30_3_t, data30_3_acc)
+        gf3.scatter(data30_3_t, data30_3_spd)
+        gf3.scatter(data30_3_t, data30_3_acc)
 
         gf1.legend(['Velocità', 'Accelerazione'])
         gf2.legend(['Velocità', 'Accelerazione'])
@@ -121,14 +121,14 @@ def graph(gradi):
     elif gradi == 45 or gradi == '45':
         fig.suptitle('45 gradi')
 
-        gf1.plot(data45_1_t, data45_1_spd)
-        gf1.plot(data45_1_t, data45_1_acc)
+        gf1.scatter(data45_1_t, data45_1_spd)
+        gf1.scatter(data45_1_t, data45_1_acc)
 
-        gf2.plot(data45_2_t, data45_2_spd)
-        gf2.plot(data45_2_t, data45_2_acc)
+        gf2.scatter(data45_2_t, data45_2_spd)
+        gf2.scatter(data45_2_t, data45_2_acc)
 
-        gf3.plot(data45_3_t, data45_3_spd)
-        gf3.plot(data45_3_t, data45_3_acc)
+        gf3.scatter(data45_3_t, data45_3_spd)
+        gf3.scatter(data45_3_t, data45_3_acc)
 
         gf1.legend(['Velocità', 'Accelerazione'])
         gf2.legend(['Velocità', 'Accelerazione'])
@@ -140,14 +140,14 @@ def graph(gradi):
     else:
         fig.suptitle('60 gradi')
 
-        gf1.plot(data60_1_t, data60_1_spd)
-        gf1.plot(data60_1_t, data60_1_acc)
+        gf1.scatter(data60_1_t, data60_1_spd)
+        gf1.scatter(data60_1_t, data60_1_acc)
 
-        gf2.plot(data60_2_t, data60_2_spd)
-        gf2.plot(data60_2_t, data60_2_acc)
+        gf2.scatter(data60_2_t, data60_2_spd)
+        gf2.scatter(data60_2_t, data60_2_acc)
 
-        gf3.plot(data60_3_t, data60_3_spd)
-        gf3.plot(data60_3_t, data60_3_acc)
+        gf3.scatter(data60_3_t, data60_3_spd)
+        gf3.scatter(data60_3_t, data60_3_acc)
 
         gf1.legend(['Velocità', 'Accelerazione'])
         gf2.legend(['Velocità', 'Accelerazione'])
