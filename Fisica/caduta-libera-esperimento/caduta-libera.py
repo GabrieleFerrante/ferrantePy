@@ -1,6 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import os.path as path
+from math import sqrt
 
 
 running_file = path.basename(__file__)
@@ -21,16 +22,27 @@ def data(path, column):
         return output
 
 # CALCOLATORE VELOCITA'
-
-
 def speed(acceleration, time):
     return [i*time[acceleration.index(i)] for i in acceleration]
+
+#CALCOLATORE ACCELERAZIONE IN CADUTA
+
+def accel(vel, time):
+    avg_vel = vel[-1] - vel[214]
+
+    ax = avg_vel-(time[-1]-time[214])
+
+    ay = [avg_vel* i for i in time[214:]]
+
+    return [sqrt(ax**2 + i**2) for i in ay]
+
+
 
 # GRAFICI
 
 
 def graph(deg, testNum, time, accX, velX, accY, velY, absAcc, absVel):
-    fig, (gf1, gf2, gf3) = plt.subplots(nrows=1, ncols=3)
+    fig, ((gf1, gf2), (gf3, gf4)) = plt.subplots(nrows=2, ncols=2)
 
     fig.suptitle(f'{deg} gradi-Lancio N°{testNum}')
 
@@ -46,11 +58,14 @@ def graph(deg, testNum, time, accX, velX, accY, velY, absAcc, absVel):
     gf3.plot(time, absAcc)
     gf3.legend(['Velocità assoluta', 'Accelerazione assoluta'])
 
+    gf4.plot(time[214:], accel(absVel, time))
+    gf4.legend(['Accelerazione in caduta'])
+
     plt.show()
 
 
 # DATI
-peso_corpo = 0.16
+massa_corpo = 0.16
 
 dati0_1 = {
     'Tempo': data(file_dir + 'gradi0/dati_1.csv', 1),
@@ -94,6 +109,8 @@ dati30_2['Velocità'] = speed(dati30_2['Accelerazione'], dati30_2['Tempo'])
 
 scelta_gradi = input('Scegli tra 0 gradi o 30 gradi: ')
 scelta_lancio = input('Scegli il lancio tra 1 e 2: ')
+
+
 
 # OUTPUT
 if str(scelta_gradi) == '0':
