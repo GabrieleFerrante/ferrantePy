@@ -17,6 +17,7 @@ def genera(): #FUNZIONE GENERATRICE
 
 def istruzioni(): #FINESTRA DI ISTRUZIONI
     window = Toplevel(root)
+    window.geometry('920x600')
 
     titolo = Label(window, text='Istruzioni', font=('Georgia', 36)).pack()
 
@@ -49,24 +50,24 @@ root.state('zoomed')
 root.geometry('1024x576')
 
 
-titolo = Label(root, text='Generatore di haiku', font=('Georgia', 36)).pack(pady=35) #TITOLO
+titolo = Label(root, text='Generatore di haiku', font=('Georgia', 60)).pack(pady=35) #TITOLO
 
 #VERSI
 versi = Frame(root)
-verso1 = Label(versi, font=('Georgia', 28))
+verso1 = Label(versi, font=('Georgia', 36))
 verso1.pack(pady=15)
-verso2 = Label(versi, font=('Georgia', 28))
+verso2 = Label(versi, font=('Georgia', 36))
 verso2.pack(pady=15)
-verso3 = Label(versi, font=('Georgia', 28))
+verso3 = Label(versi, font=('Georgia', 36))
 verso3.pack(pady=15)
 versi.pack(side=LEFT, padx=70)
 
 
 #PULSANTI
 contenitore_pulsanti = Frame(root)
-pulsante_istruzioni = Button(contenitore_pulsanti, command=istruzioni, text='Istruzioni', font=('Georgia', 20), bg='white')
+pulsante_istruzioni = Button(contenitore_pulsanti, command=istruzioni, text='Istruzioni', font=('Georgia', 30), bg='white')
 pulsante_istruzioni.pack()
-pulsante_generatore = Button(contenitore_pulsanti, command=genera, text='Genera', font=('Georgia', 20), bg='white')
+pulsante_generatore = Button(contenitore_pulsanti, command=genera, text='Genera', font=('Georgia', 30), bg='white')
 pulsante_generatore.pack(fill=X)
 contenitore_pulsanti.pack(side=RIGHT, padx=70)
 
