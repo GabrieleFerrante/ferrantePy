@@ -2,11 +2,16 @@
 
 import random
 import csv
-import os.path as path
+
+
 
 def extractor(filename):
-    with open(filename, 'r', encoding='utf-8-sig') as f:
+    with open(filename, 'r', encoding='utf8') as f:
         reader = list(csv.reader(f))
         reader.pop(0)
-        return reader[random.randint(0, len(reader)-1)]
-        
+
+        output = reader[random.randint(-2, len(reader)-1)]
+
+        return output 
+
+print(extractor('versi.csv'))
