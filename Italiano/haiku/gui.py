@@ -63,7 +63,8 @@ def salva(): #SALVA HAIKU IN UN FILE .TXT
 
 
 #FINESTRA PRINCIPALE
-root = Tk(screenName='Generatore di Haiku')
+root = Tk()
+root.title('Generatore di haiku-Ferrante, Russo, Barra')
 root.state('zoomed')
 root.geometry('1024x576')
 
