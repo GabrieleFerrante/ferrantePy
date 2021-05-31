@@ -33,6 +33,7 @@ def genera(): #FUNZIONE GENERATRICE
 
 def istruzioni(): #FINESTRA DI ISTRUZIONI
     window = Toplevel(root)
+    window.geometry('1000x700')
 
     titolo = Label(window, text='Istruzioni', font=('Georgia', 36)).pack()
 
@@ -64,12 +65,12 @@ def salva(): #SALVA HAIKU IN UN FILE .TXT
 
 #FINESTRA PRINCIPALE
 root = Tk()
-root.title('Generatore di haiku-Ferrante, Russo, Barra')
+root.title('Basho: un haiku al giorno')
 root.state('zoomed')
 root.geometry('1024x576')
 
 
-titolo = Label(root, text='Generatore di haiku', font=('Georgia', 48)).pack(pady=35) #TITOLO
+titolo = Label(root, text='Basho: un haiku al giorno', font=('Georgia', 48)).pack(pady=35) #TITOLO
 
 #VERSI
 versi = Frame(root)
