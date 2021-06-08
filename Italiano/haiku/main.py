@@ -74,6 +74,7 @@ def salva(): #SALVA HAIKU IN UN FILE .TXT
 root = Tk()
 root.title('Basho: un haiku al giorno')
 root.state('zoomed')
+root.iconbitmap('icona.ico')
 root.geometry('1024x576')
 
 titolo = Label(root, text='Basho: un haiku al giorno', font=('Georgia', 48)) #TITOLO
