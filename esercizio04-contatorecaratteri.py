@@ -3,7 +3,7 @@ from collections import Counter
 stringa = input("Inserisci una stringa: ")
 alfabeto = "ABCDEFGHIJKLMNOPQRSTUVXYZ"
 
-#ESECUZIONE
+# ESECUZIONE
 
 stringa = stringa.upper()
 contatore = Counter()

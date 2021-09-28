@@ -1,8 +1,7 @@
-#GRUPPO: FERRANTE, RUSSO, BARRA
+# GRUPPO: FERRANTE, RUSSO, BARRA
 
-import random
 import csv
-
+import random
 
 
 def extractor(filename):
@@ -10,8 +9,9 @@ def extractor(filename):
         reader = list(csv.reader(f))
         reader.pop(0)
 
-        output = reader[random.randint(-2, len(reader)-1)]
+        output = reader[random.randint(-2, len(reader) - 1)]
 
-        return output 
+        return output
+
 
 print(extractor('versi.csv'))
