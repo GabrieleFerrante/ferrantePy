@@ -60,6 +60,10 @@ class Auto:
         self.colore = value
 
 
-auto_giovanni = Auto("Giovanni", "Ford", "Fiesta", 1500, 200, "Verde")
+def main():
+    auto_giovanni = Auto("Giovanni", "Ford", "Fiesta", 1500, 200, "Verde")
+    print(auto_giovanni.getAll())
 
-print(auto_giovanni.getAll())
+
+if __name__ == "__main__":
+    main()
