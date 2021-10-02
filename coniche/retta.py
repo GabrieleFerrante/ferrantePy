@@ -50,7 +50,7 @@ class Retta:
 
 
 def main():
-    a, b, c = [float(i) if float(i).is_integer() else round(float(i)) for i in
+    a, b, c = [float(i) if not float(i).is_integer() else round(float(i)) for i in
                input("Inserisci a, b e c separati da spazi: ").split()]
 
     retta = Retta(a, b, c)
