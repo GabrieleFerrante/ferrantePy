@@ -1,7 +1,6 @@
 from collections import Counter
 
 stringa = input("Inserisci una stringa: ")
-alfabeto = "ABCDEFGHIJKLMNOPQRSTUVXYZ"
 
 # ESECUZIONE
 

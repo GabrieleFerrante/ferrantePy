@@ -13,9 +13,6 @@ class Retta:
     def getC(self):
         return self.__c
 
-    def getPunti(self):
-        return self.__punti
-
     def eqImplicita(self):
         # PRIMO TERMINE
         incognita_1 = f"{self.__a}x" if self.__a != 0 else ""
