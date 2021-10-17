@@ -13,7 +13,7 @@ class Retta:
     def getC(self):
         return self.__c
 
-    def eqImplicita(self):
+    def eqImplicita(self):  # Applicando i dovuti controlli, ritorna la stringa dell'equazione implicita
         # PRIMO TERMINE
         incognita_1 = f"{self.__a}x" if self.__a != 0 else ""
         incognita_1 = f"x" if self.__a == 1 else incognita_1
@@ -32,7 +32,7 @@ class Retta:
 
         return f"{incognita_1}{incognita_2}{noto}=0"
 
-    def eqEsplicita(self):
+    def eqEsplicita(self):  # Applicando i dovuti controlli, ritorna la stringa dell'equazione esplicita
         if self.__b == 0:
             raise ZeroDivisionError
 
@@ -54,17 +54,17 @@ class Retta:
 
         return f"y={ind}{noto}"
 
-    def trovaY(self, x):
+    def trovaY(self, x):  # Data un'ascissa, trova la relativa ordinata
         return x, round(self.__a / self.__b * x + self.__c / self.__b, 2)
 
     def punti(self, n, m):
         return [self.trovaY(i) for i in range(min(n, m), max(n, m) + 1)]
 
-    def m(self):
+    def m(self):  # Ritorna il coefficiente angolare m
         if self.__b != 0:
             return self.__a / self.__b
         else:
-            raise ZeroDivisionError
+            raise ZeroDivisionError  # Se b = 0, dai un errore
 
 
 def main():
