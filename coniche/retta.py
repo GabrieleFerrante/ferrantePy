@@ -57,7 +57,7 @@ class Retta:
     def trovaY(self, x):  # Data un'ascissa, trova la relativa ordinata
         return x, round(self.__a / self.__b * x + self.__c / self.__b, 2)
 
-    def punti(self, n, m):
+    def punti(self, n, m): # Date due ascisse, ritorna tutte le coordinate nell'intervallo
         return [self.trovaY(i) for i in range(min(n, m), max(n, m) + 1)]
 
     def m(self):  # Ritorna il coefficiente angolare m
