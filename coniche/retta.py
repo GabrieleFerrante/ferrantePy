@@ -72,7 +72,7 @@ def main():
                input("Inserisci a, b e c separati da spazi: ").split()]
 
     retta = Retta(a, b, c)
-    print(type(retta.m()))
+    print(retta.m())
 
 
 if __name__ == '__main__':
