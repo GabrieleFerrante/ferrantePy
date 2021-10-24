@@ -1,19 +1,68 @@
 class Retta:
-    def __init__(self, a, b, c):
-        self.__a = a
-        self.__b = b
-        self.__c = c
+    def __init__(self, tipo="PARAMETRI", p1=None, p2=None, p3=None):
+        """
+        Il tipo è PARAMETRI per a, b, c; COEFFICIENTE per m e un punto; PUNTI per due punti
+        """
+        if tipo == "PARAMETRI":
+            self.__a = p1
+            self.__b = p2
+            self.__c = p3
+        elif tipo == "COEFFICIENTE":
+            self.__m = p1
+            self.__punto = p2
 
-    def getA(self):
+            self.__a = self.__m
+            self.__b = 1
+            self.__c = self.__m * self.__punto[0] - self.__punto[1]
+        elif tipo == "PUNTI":
+            self.__punto1 = p1
+            self.__punto2 = p2
+            self.__m = (self.__punto2[1] - self.__punto1[1]) / (self.__punto2[0] - self.__punto1[0])
+            self.__a = self.__m
+            self.__b = 1
+            self.__c = -self.__punto1[0] + self.__punto1[1]
+        else:
+            raise Exception("Il tipo specificato non esiste")
+
+    @property
+    def a(self):
         return self.__a
 
-    def getB(self):
+    @property
+    def b(self):
         return self.__b
 
-    def getC(self):
+    @property
+    def c(self):
         return self.__c
 
-    def eqImplicita(self):  # Applicando i dovuti controlli, ritorna la stringa dell'equazione implicita
+    @property
+    def m(self):
+        """
+        :returns: il coefficiente angolare
+        """
+        try:
+            return self.__m
+        except AttributeError:
+            if self.__b != 0:
+                return -self.__a / self.__b
+            else:  # Se b = 0, dai un errore
+                raise ZeroDivisionError
+
+    @property
+    def q(self):
+        """
+        :returns: l'intercetta
+        """
+        if self.__b != 0:
+            return -self.__c / self.__b
+        else:  # Se b = 0, dai un errore
+            raise ZeroDivisionError
+
+    def eqImplicita(self):
+        """
+        :returns: la stringa dell'equazione esplicita
+        """
         # PRIMO TERMINE
         incognita_1 = f"{self.__a}x" if self.__a != 0 else ""
         incognita_1 = f"x" if self.__a == 1 else incognita_1
@@ -32,7 +81,10 @@ class Retta:
 
         return f"{incognita_1}{incognita_2}{noto}=0"
 
-    def eqEsplicita(self):  # Applicando i dovuti controlli, ritorna la stringa dell'equazione esplicita
+    def eqEsplicita(self):
+        """
+        :returns: la stringa dell'equazione esplicita
+        """
         if self.__b == 0:
             raise ZeroDivisionError
 
@@ -42,6 +94,7 @@ class Retta:
         a = self.__a if self.__b >= 0 else -self.__a
 
         ind = f"{a}/{b}x" if abs(self.__b) != 1 else f"{a}x"
+        ind = ind if abs(a/b) != 1 else f"x"
         ind = ind if a <= 0 else f"+{ind}"
         ind = ind if a != 0 else ""
 
@@ -54,25 +107,39 @@ class Retta:
 
         return f"y={ind}{noto}"
 
-    def trovaY(self, x):  # Data un'ascissa, trova la relativa ordinata
-        return x, round(self.__a / self.__b * x + self.__c / self.__b, 2)
+    def trovaY(self, x):
+        """
+        :returns: la stringa dell'equazione esplicita
+        """
+        return round(self.__a / self.__b * x + self.__c / self.__b, 2)
 
-    def punti(self, n, m): # Date due ascisse, ritorna tutte le coordinate nell'intervallo
-        return [self.trovaY(i) for i in range(min(n, m), max(n, m) + 1)]
-
-    def m(self):  # Ritorna il coefficiente angolare m
-        if self.__b != 0:
-            return self.__a / self.__b
-        else:
-            raise ZeroDivisionError  # Se b = 0, dai un errore
+    def punti(self, n, m):
+        """
+        :returns: la stringa dell'equazione esplicita
+        """
+        return [(i, self.trovaY(i)) for i in range(min(n, m), max(n, m) + 1)]
 
 
 def main():
-    a, b, c = [float(i) if not float(i).is_integer() else round(float(i)) for i in
-               input("Inserisci a, b e c separati da spazi: ").split()]
-
-    retta = Retta(a, b, c)
-    print(retta.m())
+    tipo = input("Scegli il tipo di retta tra PARAMETRI, COEFFICIENTE, PUNTI: ").upper()
+    if tipo == "PARAMETRI":
+        a, b, c = input("Inserisci a, b e c separati da spazi: ").split()
+        a, b, c = float(a), float(b), float(c)
+        retta = Retta(tipo, a, b, c)
+        print(retta.m)
+    elif tipo == "COEFFICIENTE":
+        m = float(input("Inserisci m: "))
+        x, y = float(input("Inserisci x: ")), float(input("Inserisci y: "))
+        retta = Retta(tipo, m, (x, y))
+        print(retta.eqEsplicita())
+    elif tipo == "PUNTI":
+        x1, y1 = float(input("Inserisci x1: ")), float(input("Inserisci y1: "))
+        x2, y2 = float(input("Inserisci x2: ")), float(input("Inserisci y2: "))
+        retta = Retta(tipo, (x1, y1), (x2, y2))
+        print(retta.m)
+        print(retta.eqEsplicita())
+    else:
+        raise Exception("Il tipo specificato non è valido")
 
 
 if __name__ == '__main__':
