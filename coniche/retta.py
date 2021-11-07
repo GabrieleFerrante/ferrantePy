@@ -1,29 +1,30 @@
 class Retta:
-    def __init__(self, tipo="PARAMETRI", p1=None, p2=None, p3=None):
+    def __init__(self, tipo="PARAMETRI", *args):
         """
         Il tipo è PARAMETRI per a, b, c; COEFFICIENTE per m e un punto; PUNTI per due punti
         """
         if tipo == "PARAMETRI":
-            self.__a = p1
-            self.__b = p2
-            self.__c = p3
+            self.__a = args[0]
+            self.__b = args[1]
+            self.__c = args[2]
         elif tipo == "COEFFICIENTE":
-            self.__m = p1
-            self.__punto = p2
+            self.__m = args[0]
+            self.__punto = args[1]
 
-            self.__a = self.__m
+            self.__a = -self.__m
             self.__b = 1
             self.__c = self.__m * self.__punto[0] - self.__punto[1]
         elif tipo == "PUNTI":
-            self.__punto1 = p1
-            self.__punto2 = p2
+            self.__punto1 = args[0]
+            self.__punto2 = args[1]
             self.__m = (self.__punto2[1] - self.__punto1[1]) / (self.__punto2[0] - self.__punto1[0])
-            self.__a = self.__m
+            self.__a = -self.__m
             self.__b = 1
             self.__c = -self.__punto1[0] + self.__punto1[1]
         else:
-            raise Exception("Il tipo specificato non esiste")
+            raise Exception("Il tipo specificato non è un'opzione")
 
+    # PROPRIETA' DELLA RETTA
     @property
     def a(self):
         return self.__a
@@ -81,6 +82,7 @@ class Retta:
 
         return f"{incognita_1}{incognita_2}{noto}=0"
 
+    # FUNZIONI DELLA RETTA
     def eqEsplicita(self):
         """
         :returns: la stringa dell'equazione esplicita
@@ -118,6 +120,23 @@ class Retta:
         :returns: la stringa dell'equazione esplicita
         """
         return [(i, self.trovaY(i)) for i in range(min(n, m), max(n, m) + 1)]
+
+    def intersezione(self, retta1):
+        if type(retta1) != Retta:
+            raise Exception("Per calcolare l'intersezione serve un altra retta")
+
+        if retta1.b == 0:
+            raise ZeroDivisionError
+
+        if -self.__a / self.__b == -retta1.a / retta1.b and -self.__c / self.__b != -retta1.c / retta1.b:
+            return None
+
+        if -self.__a / self.__b == -retta1.a / retta1.b and -self.__c / self.__b == -retta1.c / retta1.b:
+            return self
+
+        x = ((self.__c / self.__b) - (retta1.c / retta1.b)) / ((-self.__a / self.__b) + (retta1.a / retta1.b))
+        y = (-self.__a / self.__b) * x + (-self.__c / self.__b)
+        return round(x, 2), round(y, 2)
 
 
 def main():
