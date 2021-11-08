@@ -62,7 +62,7 @@ class Retta:
 
     def eqImplicita(self):
         """
-        :returns: la stringa dell'equazione esplicita
+        :returns: la stringa dell'equazione implicita
         """
         # PRIMO TERMINE
         incognita_1 = f"{self.__a}x" if self.__a != 0 else ""
