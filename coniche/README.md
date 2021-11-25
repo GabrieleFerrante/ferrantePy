@@ -1,5 +1,5 @@
 
-# Classe di una retta in Python
+# Classe delle coniche in Python
 
 #### Ferrante Gabriele 3E
 
